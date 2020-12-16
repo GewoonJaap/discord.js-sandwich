@@ -1,4 +1,5 @@
 const si = require('systeminformation');
+const config = require('../config.json');
 const os = require('os');
 module.exports = {
   main: async function (bot, msg) {
@@ -39,6 +40,12 @@ module.exports = {
     cmds.push({
       name: `I am open source :), feel free to contribute`,
       value: `https://github.com/GewoonJaap/discord.js-sandwich`,
+      inline: true,
+    });
+
+    cmds.push({
+      name: `Invite me to your server`,
+      value: `https://discord.com/oauth2/authorize?client_id=${config.BOTID}&scope=bot&permissions=${config.PERMISSIONS}`,
       inline: true,
     });
 
