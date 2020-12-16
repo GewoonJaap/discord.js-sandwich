@@ -123,7 +123,7 @@ commands.reload.main = function (bot, msg) {
 			commands[args] = require(__dirname + '/commands/' + msg.content + '.js');
 			bot.sendNotification("Reloaded " + msg.content + ".js successfully.", "success", msg);
 		} catch (err) {
-			msg.channel.sendMessage("Command not found");
+			msg.channel.send("Command not found");
 		}
 	} else {
 		bot.sendNotification("You do not have permission to use this command.", "error", msg);
