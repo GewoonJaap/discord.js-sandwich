@@ -85,6 +85,7 @@ commands.load.main = function (bot, msg) {
 			delete require.cache[__dirname + '/commands/' + msg.content + '.js'];
 			commands[msg.content] = require(__dirname + '/commands/' + msg.content + '.js');
 			bot.sendNotification("Loaded " + msg.content + ".js succesfully.", "success", msg);
+			console.log(`Loaded ${msg.content}.js succesfully.`)
 		} catch (err) {
 			bot.sendNotification("The command was not found, or there was an error loading it.", "error", msg);
 		}
@@ -103,6 +104,7 @@ commands.unload.main = function (bot, msg) {
 			delete commands[msg.content];
 			delete require.cache[__dirname + '/commands/' + msg.content + '.js'];
 			bot.sendNotification("Unloaded " + msg.content + ".js succesfully.", "success", msg);
+			console.log(`Unloaded ${msg.content}.js succesfully.`)
 		} catch (err) {
 			bot.sendNotification("Command not found.", "error", msg);
 		}
@@ -122,6 +124,7 @@ commands.reload.main = function (bot, msg) {
 			delete require.cache[__dirname + '/commands/' + msg.content + '.js'];
 			commands[args] = require(__dirname + '/commands/' + msg.content + '.js');
 			bot.sendNotification("Reloaded " + msg.content + ".js successfully.", "success", msg);
+			console.log(`Reloaded ${msg.content}.js succesfully.`)
 		} catch (err) {
 			msg.channel.send("Command not found");
 		}
