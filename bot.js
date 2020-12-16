@@ -3,6 +3,7 @@
 const Discord = require("discord.js");
 const fs = require('fs');
 const config = require('./config.json');
+const log = require('fancy-log');
 
 const bot = new Discord.Client({
 	autoReconnect: true
@@ -85,7 +86,7 @@ commands.load.main = function (bot, msg) {
 			delete require.cache[__dirname + '/commands/' + msg.content + '.js'];
 			commands[msg.content] = require(__dirname + '/commands/' + msg.content + '.js');
 			bot.sendNotification("Loaded " + msg.content + ".js succesfully.", "success", msg);
-			console.log(`Loaded ${msg.content}.js succesfully.`)
+			log.info(`Loaded ${msg.content}.js succesfully.`)
 		} catch (err) {
 			bot.sendNotification("The command was not found, or there was an error loading it.", "error", msg);
 		}
@@ -104,7 +105,7 @@ commands.unload.main = function (bot, msg) {
 			delete commands[msg.content];
 			delete require.cache[__dirname + '/commands/' + msg.content + '.js'];
 			bot.sendNotification("Unloaded " + msg.content + ".js succesfully.", "success", msg);
-			console.log(`Unloaded ${msg.content}.js succesfully.`)
+			log.info(`Unloaded ${msg.content}.js succesfully.`)
 		} catch (err) {
 			bot.sendNotification("Command not found.", "error", msg);
 		}
@@ -124,7 +125,7 @@ commands.reload.main = function (bot, msg) {
 			delete require.cache[__dirname + '/commands/' + msg.content + '.js'];
 			commands[args] = require(__dirname + '/commands/' + msg.content + '.js');
 			bot.sendNotification("Reloaded " + msg.content + ".js successfully.", "success", msg);
-			console.log(`Reloaded ${msg.content}.js succesfully.`)
+			log.info(`Reloaded ${msg.content}.js succesfully.`)
 		} catch (err) {
 			msg.channel.send("Command not found");
 		}
@@ -138,10 +139,10 @@ var loadCommands = function () {
 	for (let file of files) {
 		if (file.endsWith('.js')) {
 			commands[file.slice(0, -3)] = require(__dirname + '/commands/' + file);
-			if (bot.DETAILED_LOGGING) console.log("Loaded " + file);
+			if (bot.DETAILED_LOGGING) log("Loaded " + file);
 		}
 	}
-	console.log("———— All Commands Loaded! ————");
+	log.info("———— All Commands Loaded! ————");
 }
 
 var checkCommand = function (msg, isMention) {
@@ -157,7 +158,7 @@ var checkCommand = function (msg, isMention) {
 }
 
 bot.on("ready", () => {
-	console.log('Ready to begin! Serving in ' + bot.guilds.cache.array().length + ' servers.');
+	log.info('Ready to begin! Serving in ' + bot.guilds.cache.array().length + ' servers.');
 	bot.user.setPresence({
 		activity: {
 			name: config.DEFAULT_ACTIVITY
@@ -178,13 +179,13 @@ bot.on("message", msg => {
 });
 
 bot.on('error', (err) => {
-	console.log("————— BIG ERROR —————");
-	console.log(err);
-	console.log("——— END BIG ERROR ———");
+	log.error("————— BIG ERROR —————");
+	log.error(err);
+	log.error("——— END BIG ERROR ———");
 });
 
 bot.on("disconnected", () => {
-	console.log("Disconnected!");
+	log.error("Disconnected!");
 });
 
 bot.login(bot.TOKEN);
