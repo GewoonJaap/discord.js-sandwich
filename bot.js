@@ -4,6 +4,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const config = require('./config.json');
 const log = require('fancy-log');
+const Mustache = require('mustache');
 
 const bot = new Discord.Client({
   autoReconnect: true,
@@ -158,15 +159,7 @@ var checkCommand = function (msg, isMention) {
 };
 
 bot.on('ready', () => {
-  log.info('Ready to begin! Serving in ' + bot.guilds.cache.array().length + ' servers.');
-  bot.user
-    .setPresence({
-      activity: {
-        name: config.DEFAULT_ACTIVITY,
-      },
-      status: 'idle',
-    })
-    .catch(console.error);
+  require('./util/botStatus').setDefaultStatus(bot);
   loadCommands();
 });
 
@@ -178,6 +171,11 @@ bot.on('message', msg => {
     checkCommand(msg, false);
     if (bot.DELETE_COMMANDS) msg.delete();
   }
+});
+
+bot.on('guildMemberAdd', function (member) {
+  console.log(`a user joins a guild: ${member.tag}`);
+  require('./util/botStatus').setDefaultStatus(bot);
 });
 
 bot.on('error', err => {
