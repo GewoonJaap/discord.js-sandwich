@@ -1,0 +1,13 @@
+{
+    "OWNERID": "Discord owner ID",
+    "PREFIX": "Prefix",
+    "TOKEN": "Discord BOT Token",
+
+    "DETAILED_LOGGING": true,
+    "DELETE_COMMANDS": false,
+
+    "COLOR": "0x351C75",
+    "SUCCESS_COLOR": "0x00ff00",
+    "ERROR_COLOR": "0x0000ff",
+    "INFO_COLOR": "0x0000ff"
+}

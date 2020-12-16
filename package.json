@@ -1,0 +1,22 @@
+{
+  "name": "discord.js-sandwich",
+  "version": "1.0.0",
+  "description": "A modular bot template for [discord.js](https://github.com/hydrabolt/discord.js/).",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GewoonJaap/discord.js-sandwich.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GewoonJaap/discord.js-sandwich/issues"
+  },
+  "homepage": "https://github.com/GewoonJaap/discord.js-sandwich",
+  "dependencies": {
+    "discord.js": "^12.5.1"
+  }
+}
