@@ -161,6 +161,9 @@ var checkCommand = function (msg, isMention) {
 bot.on('ready', () => {
   require('./util/botStatus').setDefaultStatus(bot);
   loadCommands();
+  setInterval(function () {
+    require('./util/botStatus').setDefaultStatus(bot);
+  }, 1000 * 120);
 });
 
 bot.on('message', msg => {
@@ -175,7 +178,6 @@ bot.on('message', msg => {
 
 bot.on('guildMemberAdd', function (member) {
   console.log(`a user joins a guild: ${member.tag}`);
-  require('./util/botStatus').setDefaultStatus(bot);
 });
 
 bot.on('error', err => {
