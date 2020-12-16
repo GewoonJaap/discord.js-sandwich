@@ -1,18 +1,18 @@
 {
-    "OWNERID": "Discord owner ID",
-    "PREFIX": "Prefix",
-    "TOKEN": "Discord BOT Token",
-    "DEFAULT_ACTIVITY": "with 🥪 | .ping",
-    "BOTID": "User id from the bot",
-    "PERMISSIONS": "Calulate them at the bot page on the discord developer web dashboard, store this as int"
+  "OWNERID": "Discord owner ID",
+  "PREFIX": "Prefix",
+  "TOKEN": "Discord BOT Token",
+  "DEFAULT_ACTIVITY": "with 🥪 | .ping",
+  "BOTID": "User id from the bot",
+  "PERMISSIONS": "Calulate them at the bot page on the discord developer web dashboard, store this as int",
 
-    "DETAILED_LOGGING": true,
-    "DELETE_COMMANDS": false,
+  "DETAILED_LOGGING": true,
+  "DELETE_COMMANDS": false,
 
-    "COLOR": "0x351C75",
-    "SUCCESS_COLOR": "0x00ff00",
-    "ERROR_COLOR": "0x0000ff",
-    "INFO_COLOR": "0x0000ff",
+  "COLOR": "0x351C75",
+  "SUCCESS_COLOR": "0x00ff00",
+  "ERROR_COLOR": "0x0000ff",
+  "INFO_COLOR": "0x0000ff",
 
-    "DIALOGFLOW_PROJECTID": "Dialogflow Project ID, used for bigbrain.js"
+  "DIALOGFLOW_PROJECTID": "Dialogflow Project ID, used for bigbrain.js"
 }
