@@ -123,7 +123,7 @@ commands.reload.main = function (bot, msg) {
     try {
       delete commands[msg.content];
       delete require.cache[__dirname + '/commands/' + msg.content + '.js'];
-      commands[args] = require(__dirname + '/commands/' + msg.content + '.js');
+      commands[msg.content] = require(__dirname + '/commands/' + msg.content + '.js');
       bot.sendNotification('Reloaded ' + msg.content + '.js successfully.', 'success', msg);
       log.info(`Reloaded ${msg.content}.js succesfully.`);
     } catch (err) {
