@@ -3,6 +3,8 @@
     "PREFIX": "Prefix",
     "TOKEN": "Discord BOT Token",
     "DEFAULT_ACTIVITY": "with 🥪 | .ping",
+    "BOTID": "User id from the bot",
+    "PERMISSIONS": "Calulate them at the bot page on the discord developer web dashboard, store this as int"
 
     "DETAILED_LOGGING": true,
     "DELETE_COMMANDS": false,
