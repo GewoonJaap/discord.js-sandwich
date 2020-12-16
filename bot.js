@@ -147,11 +147,11 @@ var loadCommands = function () {
 
 var checkCommand = function (msg, isMention) {
 	if (isMention) {
-		let command = msg.content.split(" ")[1];
+		let command = msg.content.split(" ")[1].toLowerCase();
 		msg.content = msg.content.split(" ").splice(2, msg.content.split(' ').length).join(' ');
 		if (command && commands[command]) commands[command].main(bot, msg);
 	} else {
-		let command = msg.content.split(bot.PREFIX)[1].split(" ")[0];
+		let command = msg.content.split(bot.PREFIX)[1].split(" ")[0].toLowerCase();
 		msg.content = msg.content.replace(bot.PREFIX + command + " ", "");
 		if (command && commands[command]) commands[command].main(bot, msg);
 	}
