@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/GewoonJaap/discord.js-sandwich",
   "dependencies": {
-    "discord.js": "^12.5.1"
+    "dialogflow": "^1.2.0",
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0",
+    "request": "^2.88.2",
+    "uuid": "^8.3.2"
   }
 }

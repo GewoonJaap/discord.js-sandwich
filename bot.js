@@ -157,7 +157,7 @@ bot.on("ready", () => {
 	console.log('Ready to begin! Serving in ' + bot.guilds.cache.array().length + ' servers.');
 	bot.user.setPresence({
 		activity: {
-			name: `with 🥪 | .ping`
+			name: config.DEFAULT_ACTIVITY
 		},
 		status: 'idle'
 	}).catch(console.error);
