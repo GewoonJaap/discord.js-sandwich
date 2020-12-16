@@ -36,6 +36,12 @@ module.exports = {
       inline: true,
     });
 
+    cmds.push({
+      name: `I am open source :), feel free to contribute`,
+      value: `https://github.com/GewoonJaap/discord.js-sandwich`,
+      inline: true,
+    });
+
     let embed = {
       color: bot.COLOR,
       description: 'Here is some basic info',
