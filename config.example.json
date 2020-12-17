@@ -1,6 +1,7 @@
 {
   "DEVMODE": false,
   "DEV_SERVER": "DEV SERVER ID",
+  "FEEDBACK_CHANNEL": "Feedback channel",
 
   "OWNERID": "Discord owner ID",
   "PREFIX": "Prefix",
