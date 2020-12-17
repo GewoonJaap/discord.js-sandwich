@@ -45,7 +45,7 @@ module.exports = {
 
     cmds.push({
       name: `Invite me to your server`,
-      value: `https://discord.com/oauth2/authorize?client_id=${config.BOTID}&scope=bot&permissions=${config.PERMISSIONS}`,
+      value: `${config.BOT_INVITE}`,
       inline: true,
     });
 

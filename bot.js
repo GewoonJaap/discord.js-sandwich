@@ -43,6 +43,7 @@ bot.sendNotification = function (info, type, msg) {
 };
 
 let commands = {};
+let interactions = {};
 
 commands.help = {};
 commands.help.args = '';
@@ -134,6 +135,18 @@ commands.reload.main = function (bot, msg) {
   }
 };
 
+function loadInteractions() {
+  let files = fs.readdirSync(__dirname + '/interactions');
+  for (let file of files) {
+    if (file.endsWith('.js')) {
+      interactions[file.slice(0, -3)] = require(__dirname + '/interactions/' + file);
+      interactions[file.slice(0, -3)].registerCommand(bot);
+      if (bot.DETAILED_LOGGING) log('Loaded ' + file);
+    }
+  }
+  log.info('———— All Interactions Loaded! ————');
+}
+
 var loadCommands = function () {
   let files = fs.readdirSync(__dirname + '/commands');
   for (let file of files) {
@@ -160,23 +173,31 @@ var checkCommand = function (msg, isMention) {
 bot.on('ready', () => {
   require('./util/botStatus').setDefaultStatus(bot);
   loadCommands();
+  loadInteractions();
   setInterval(function () {
     require('./util/botStatus').setDefaultStatus(bot);
   }, 1000 * 120);
 });
 
 bot.on('message', msg => {
-  if (msg.content.startsWith('<@' + bot.user.id + '>') || msg.content.startsWith('<@!' + bot.user.id + '>')) {
-    checkCommand(msg, true);
-    if (bot.DELETE_COMMANDS) msg.delete();
-  } else if (msg.content.startsWith(bot.PREFIX)) {
-    checkCommand(msg, false);
-    if (bot.DELETE_COMMANDS) msg.delete();
+  if (!config.DEVMODE || (config.DEVMODE && msg.guild.id == config.DEV_SERVER)) {
+    if (msg.content.startsWith('<@' + bot.user.id + '>') || msg.content.startsWith('<@!' + bot.user.id + '>')) {
+      checkCommand(msg, true);
+      if (bot.DELETE_COMMANDS) msg.delete();
+    } else if (msg.content.startsWith(bot.PREFIX)) {
+      checkCommand(msg, false);
+      if (bot.DELETE_COMMANDS) msg.delete();
+    }
   }
 });
 
+bot.ws.on('INTERACTION_CREATE', async interaction => {
+  const interaction_name = interaction.data.name;
+  if (interaction_name && interactions[interaction_name]) interactions[interaction_name].execute(bot, interaction);
+});
+
 bot.on('guildMemberAdd', function (member) {
-  console.log(`a user joins a guild: ${member.tag}`);
+  console.log(`a user joins a guild: ${member.user}`);
 });
 
 bot.on('error', err => {
