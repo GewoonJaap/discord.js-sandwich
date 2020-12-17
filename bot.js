@@ -193,7 +193,9 @@ bot.on('message', msg => {
 
 bot.ws.on('INTERACTION_CREATE', async interaction => {
   const interaction_name = interaction.data.name;
-  if (interaction_name && interactions[interaction_name]) interactions[interaction_name].execute(bot, interaction);
+  if (!config.DEVMODE || (config.DEVMODE && interaction.guild_id == config.DEV_SERVER)) {
+    if (interaction_name && interactions[interaction_name]) interactions[interaction_name].execute(bot, interaction);
+  }
 });
 
 bot.on('guildMemberAdd', function (member) {
