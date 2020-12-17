@@ -3,5 +3,5 @@ module.exports = {
   execute: function () {
     return `🧠📣: ${responses[Math.floor(Math.random() * responses.length)]}`;
   },
-  description: 'Get a wise Bob Ross quotes',
+  description: 'Get a wise Bob Ross quote',
 };
