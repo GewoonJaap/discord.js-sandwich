@@ -33,6 +33,8 @@
     "dotenv": "^8.2.0",
     "eslint": "^7.15.0",
     "fancy-log": "^1.3.3",
+    "image-to-ascii": "^3.0.13",
+    "morse-node": "^0.1.1",
     "mustache": "^4.1.0",
     "prettier": "^2.2.1",
     "request": "^2.88.2",

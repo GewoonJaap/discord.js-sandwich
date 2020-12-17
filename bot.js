@@ -54,7 +54,7 @@ commands.help.main = function (bot, msg) {
   for (let command in commands) {
     if (!commands[command].hide) {
       cmds.push({
-        name: bot.PREFIX + command,
+        name: bot.PREFIX + command + `${commands[command].args ? ' ' + commands[command].args : ''}`,
         value: commands[command].help,
         inline: true,
       });

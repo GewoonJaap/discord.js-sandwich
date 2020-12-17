@@ -12,4 +12,5 @@ module.exports = {
   },
   help: 'Get your avatar',
   hide: false,
+  args: '[@mention]',
 };
