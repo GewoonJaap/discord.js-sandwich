@@ -1,8 +1,8 @@
-const quotes = require('../util/bobross_quote.json');
+const bobross = require('../util/universalCommands/bobross');
 module.exports = {
   main: function (bot, msg) {
-    bot.sendNotification(`🧠📣: ${quotes[Math.floor(Math.random() * quotes.length)]}`, 'success', msg);
+    bot.sendNotification(bobross.execute(), 'success', msg);
   },
-  help: 'Get a random bobross quote',
+  help: bobross.description,
   hide: false,
 };

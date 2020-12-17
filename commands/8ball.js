@@ -1,8 +1,8 @@
-const responses = require('../util/8ball_responses.json');
+const ball = require('../util/universalCommands/8ball');
 module.exports = {
   main: function (bot, msg) {
-    bot.sendNotification(`👀: ${responses[Math.floor(Math.random() * responses.length)]}`, 'success', msg);
+    bot.sendNotification(ball.execute(), 'success', msg);
   },
-  help: '8Ball will decide👀👀',
+  help: ball.description,
   hide: false,
 };

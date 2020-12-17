@@ -1,8 +1,8 @@
+const coinFlip = require('../util/universalCommands/coinflip');
 module.exports = {
   main: function (bot, msg) {
-    const result = Math.random() < 0.5 ? 'Tails' : 'Heads';
-    bot.sendNotification(`📢 ${result}`, 'success', msg);
+    bot.sendNotification(coinFlip.execute(), 'success', msg);
   },
-  help: 'Simple coinflip',
+  help: coinFlip.description,
   hide: false,
 };
