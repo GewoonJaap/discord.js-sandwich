@@ -1,4 +1,5 @@
 const slashCommand = require('../util/slashcommand/index');
+const request = require('request');
 module.exports = {
   registerCommand: function (bot) {
     slashCommand.registerCommand(bot, {
