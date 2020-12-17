@@ -4,7 +4,6 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const config = require('./config.json');
 const log = require('fancy-log');
-const Mustache = require('mustache');
 
 const bot = new Discord.Client({
   autoReconnect: true,
