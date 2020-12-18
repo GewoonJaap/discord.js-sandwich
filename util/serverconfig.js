@@ -23,6 +23,7 @@ module.exports = {
         if (!result || result.length == 0) {
           module.exports.addConfig(bot, guildId);
           reject(`Something went wrong, try again later`);
+          return;
         } else {
           if (allowedUpdateKeys.indexOf(setting) != -1) {
             let newData = {};
