@@ -6,7 +6,17 @@ module.exports = {
       'https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=en-US&country=NL&allowCountries=NL'
     );
     if (data.status) {
-      const game = data.data.data.Catalog.searchStore.elements[0];
+      let game;
+      const games = data.data.data.Catalog.searchStore.elements;
+      for (let i = 0; i < games.length; i++) {
+        if (games[i].promotions.promotionalOffers.length != 0) {
+          const offer = games[i].promotions.promotionalOffers[0].promotionalOffers[0];
+          if (offer.startDate.startsWith(`2020-12-${new Date().getDate()}`) || offer.endDate.startsWith(`2020-12-${new Date().getDate()}`)) {
+            game = games[i];
+            break;
+          }
+        }
+      }
       const embed = new MessageEmbed()
         .setColor('0x0000FF')
         .setTitle(`Free game of the day: ${game.title}`)

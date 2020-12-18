@@ -15,6 +15,7 @@ module.exports = {
     const view = {
       users: bot.users.cache.size,
       servers: bot.guilds.cache.array().length,
+      prefix: config.PREFIX,
     };
     const output = Mustache.render(status, view);
     bot.user.setPresence({ activity: { name: output }, status: 'idle' }).catch(console.error);

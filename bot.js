@@ -26,6 +26,7 @@ bot.ERROR_COLOR = config.ERROR_COLOR;
 bot.INFO_COLOR = config.INFO_COLOR;
 
 bot.cache = {};
+bot.cache.stats = { commandsRecieved: 0, slashCommandsRecieved: 0, messagesSent: 0 };
 
 String.prototype.padRight = function (l, c) {
   return this + Array(l - this.length + 1).join(c || ' ');
@@ -168,11 +169,19 @@ var checkCommand = function (msg, isMention) {
   if (isMention) {
     let command = msg.content.split(' ')[1].toLowerCase();
     msg.content = msg.content.split(' ').splice(2, msg.content.split(' ').length).join(' ');
-    if (command && commands[command]) commands[command].main(bot, msg);
+    if (command && commands[command]) {
+      commands[command].main(bot, msg);
+      bot.cache.stats.commandsRecieved++;
+      bot.cache.stats.messagesSent++;
+    }
   } else {
     let command = msg.content.split(bot.PREFIX)[1].split(' ')[0].toLowerCase();
     msg.content = msg.content.replace(bot.PREFIX + command + ' ', '');
-    if (command && commands[command]) commands[command].main(bot, msg);
+    if (command && commands[command]) {
+      commands[command].main(bot, msg);
+      bot.cache.stats.commandsRecieved++;
+      bot.cache.stats.messagesSent++;
+    }
   }
 };
 
@@ -201,7 +210,11 @@ bot.on('message', msg => {
 bot.ws.on('INTERACTION_CREATE', async interaction => {
   const interaction_name = interaction.data.name;
   if (!config.DEVMODE || (config.DEVMODE && interaction.guild_id == config.DEV_SERVER)) {
-    if (interaction_name && interactions[interaction_name]) interactions[interaction_name].execute(bot, interaction);
+    if (interaction_name && interactions[interaction_name]) {
+      interactions[interaction_name].execute(bot, interaction);
+      bot.cache.stats.slashCommandsRecieved++;
+      bot.cache.stats.messagesSent++;
+    }
   }
 });
 
