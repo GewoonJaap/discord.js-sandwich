@@ -22,7 +22,7 @@ module.exports = {
       serverConfig.findOne({ serverID: guildId }, function (err, result) {
         if (!result || result.length == 0) {
           module.exports.addConfig(bot, guildId);
-          returejectrn(`Something went wrong, try again later`);
+          reject(`Something went wrong, try again later`);
         } else {
           if (allowedUpdateKeys.indexOf(setting) != -1) {
             let newData = {};
