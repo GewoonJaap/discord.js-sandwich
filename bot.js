@@ -4,6 +4,10 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const config = require('./config.json');
 const log = require('fancy-log');
+const timers = require('./util/timers/index');
+const mongoose = require('mongoose');
+mongoose.connect(config.MONGODB_URL, { useNewUrlParser: true });
+const serverConfig = require('./util/serverconfig');
 
 const bot = new Discord.Client({
   autoReconnect: true,
@@ -20,6 +24,8 @@ bot.COLOR = config.COLOR;
 bot.SUCCESS_COLOR = config.SUCCESS_COLOR;
 bot.ERROR_COLOR = config.ERROR_COLOR;
 bot.INFO_COLOR = config.INFO_COLOR;
+
+bot.cache = {};
 
 String.prototype.padRight = function (l, c) {
   return this + Array(l - this.length + 1).join(c || ' ');
@@ -174,6 +180,7 @@ bot.on('ready', () => {
   require('./util/botStatus').setDefaultStatus(bot);
   loadCommands();
   loadInteractions();
+  timers.init(bot);
   setInterval(function () {
     require('./util/botStatus').setDefaultStatus(bot);
   }, 1000 * 120);
@@ -200,6 +207,11 @@ bot.ws.on('INTERACTION_CREATE', async interaction => {
 
 bot.on('guildMemberAdd', function (member) {
   console.log(`a user joins a guild: ${member.user}`);
+});
+
+bot.on('guildCreate', function (guild) {
+  console.log(`the client joins a guild`);
+  serverConfig.addConfig(bot, guild);
 });
 
 bot.on('error', err => {
