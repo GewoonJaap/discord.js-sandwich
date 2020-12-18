@@ -211,7 +211,7 @@ bot.on('guildMemberAdd', function (member) {
 
 bot.on('guildCreate', function (guild) {
   console.log(`the client joins a guild`);
-  serverConfig.addConfig(bot, guild);
+  serverConfig.addConfig(bot, guild.id);
 });
 
 bot.on('error', err => {

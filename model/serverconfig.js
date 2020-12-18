@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const serverConfigSchema = new Schema(
   {
-    serverID: Number,
+    serverID: String,
     epicGamesGameChannel: String,
   },
   {
