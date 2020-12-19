@@ -22,7 +22,7 @@ module.exports = {
       .setTitle(`Emojis in ${msg.guild.name}.`)
       .addField(`**Animated [${Animated}]**:`, EmojisAnimated, false)
       .addField(`**Standard [${EmojiCount}]**:`, Emojis, false)
-      .setDescription(`**Over all emojis [${OverallEmojis}]**:`);
+      .setDescription(`**Overall emojis [${OverallEmojis}]**:`);
     msg.channel.send(Embed);
   },
   help: "Get all the emoji's from this server",
