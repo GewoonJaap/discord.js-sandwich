@@ -17,11 +17,12 @@ module.exports = {
       }
     });
     let Embed = new MessageEmbed()
+      .setColor(bot.COLOR)
+      .setThumbnail(msg.guild.iconURL())
       .setTitle(`Emojis in ${msg.guild.name}.`)
-      .setDescription(
-        `**Animated [${Animated}]**:\n${EmojisAnimated}\n\n**Standard [${EmojiCount}]**:\n${Emojis}\n\n**Over all emojis [${OverallEmojis}]**`
-      )
-      .setColor(bot.SUCCESS_COLOR);
+      .addField(`**Animated [${Animated}]**:`, EmojisAnimated, false)
+      .addField(`**Standard [${EmojiCount}]**:`, Emojis, false)
+      .setDescription(`**Over all emojis [${OverallEmojis}]**:`);
     msg.channel.send(Embed);
   },
   help: "Get all the emoji's from this server",
