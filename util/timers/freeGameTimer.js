@@ -12,22 +12,23 @@ module.exports = {
       if (!bot.cache.epicGamesGame) bot.cache.epicGamesGame = game;
 
       const cached = bot.cache.epicGamesGame;
-
-      if (cached.title != game.title) {
-        console.log(`New game! ${cached.title} -> ${game.title}`);
-        const embed = await gameEmbed.execute();
-        serverConfigs.find({}, function (err, result) {
-          if (err) log.error(err);
-          else {
-            bot.cache.epicGamesGame = game;
-            for (let i = 0; i < result.length; i++) {
-              try {
-                bot.channels.cache.get(result[i].epicGamesGameChannel).send('There is a new Epic Games free game!', { embed });
-              } catch (error) {}
+      try {
+        if (cached.title != game.title) {
+          console.log(`New game! ${cached.title} -> ${game.title}`);
+          const embed = await gameEmbed.execute();
+          serverConfigs.find({}, function (err, result) {
+            if (err) log.error(err);
+            else {
+              bot.cache.epicGamesGame = game;
+              for (let i = 0; i < result.length; i++) {
+                try {
+                  bot.channels.cache.get(result[i].epicGamesGameChannel).send('There is a new Epic Games free game!', { embed });
+                } catch (error) {}
+              }
             }
-          }
-        });
-      }
+          });
+        }
+      } catch (e) {}
     }
   },
   time: 1000 * 60,
