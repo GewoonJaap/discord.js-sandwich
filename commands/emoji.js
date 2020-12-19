@@ -10,10 +10,10 @@ module.exports = {
       OverallEmojis++;
       if (emoji.animated) {
         Animated++;
-        EmojisAnimated += Emoji(emoji.id);
+        EmojisAnimated += Emoji(emoji.id, bot);
       } else {
         EmojiCount++;
-        Emojis += Emoji(emoji.id);
+        Emojis += Emoji(emoji.id, bot);
       }
     });
     let Embed = new MessageEmbed()
@@ -28,6 +28,6 @@ module.exports = {
   hide: false,
 };
 
-function Emoji(id) {
+function Emoji(id, bot) {
   return bot.emojis.cache.get(id).toString();
 }
