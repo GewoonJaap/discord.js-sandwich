@@ -1,66 +1,35 @@
 const si = require('systeminformation');
+const { MessageEmbed } = require('discord.js');
 const config = require('../config.json');
 const os = require('os');
+const botStats = require('../model/botstats');
 module.exports = {
   main: async function (bot, msg) {
     let cmds = [];
     const cpuData = await si.cpu();
     const osInfo = await si.osInfo();
 
-    cmds.push({
-      name: `CPU:`,
-      value: `${cpuData.manufacturer} ${cpuData.brand}`,
-      inline: true,
-    });
-
-    cmds.push({
-      name: `Platform:`,
-      value: `${osInfo.distro}`,
-      inline: true,
-    });
-
-    cmds.push({
-      name: `RAM usage`,
-      value: `${bytesToSize(os.freemem())}/${bytesToSize(os.totalmem())}`,
-      inline: true,
-    });
-
-    cmds.push({
-      name: `Guilds the bot is in`,
-      value: `${bot.guilds.cache.size}`,
-      inline: true,
-    });
-
-    cmds.push({
-      name: `The amount of people the bot serves`,
-      value: `${bot.users.cache.size}`,
-      inline: true,
-    });
-
-    cmds.push({
-      name: `I am open source :), feel free to contribute`,
-      value: `https://github.com/GewoonJaap/discord.js-sandwich`,
-      inline: true,
-    });
-
-    cmds.push({
-      name: `Invite me to your server`,
-      value: `${config.BOT_INVITE}`,
-      inline: true,
-    });
-
-    let embed = {
-      color: bot.COLOR,
-      description: 'Here is some basic info',
-      fields: cmds,
-      footer: {
-        icon_url: bot.user.avatarURL,
-        text: bot.user.username,
-      },
-    };
-
-    msg.channel.send('', {
-      embed,
+    botStats.find({}, function (err, result) {
+      const embed = new MessageEmbed()
+        .setColor(bot.COLOR)
+        .setTitle('Some stats about me :)')
+        .addField('🖥️CPU:', `${cpuData.manufacturer} ${cpuData.brand}`, false)
+        .addField('🖥️Platform:', `${osInfo.distro}`, false)
+        .addField('💾RAM usage:', `${bytesToSize(os.freemem())}/${bytesToSize(os.totalmem())}`, false)
+        .addField('🏫Amount of guilds I am in', `${bot.guilds.cache.size}`, false)
+        .addField('🥪Amount of sandwiches I serve in those guilds', `${bot.users.cache.size}`, false)
+        .addField(
+          '🥪Amount of commands I recieved',
+          `${result[0].commandsRecieved} and ${result[0].slashCommandsRecieved} slash commands`,
+          false
+        )
+        .addField('🥪Amount of messages I sent', `${result[0].messagesSent}`, false)
+        .addField('ℹ️My source code', `https://github.com/GewoonJaap/discord.js-sandwich`, true)
+        .addField('✉️Invite me', `${config.BOT_INVITE}`, true)
+        .addField('🖊️Coded by:', `Mr. Proper#2095`, true)
+        .setThumbnail(bot.user.avatarURL())
+        .setTimestamp();
+      msg.channel.send(msg.author, { embed });
     });
   },
   help: 'Get basic information about the bot',
