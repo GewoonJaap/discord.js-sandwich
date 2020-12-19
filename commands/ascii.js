@@ -13,6 +13,8 @@ module.exports = {
       },
       (err, converted) => {
         if (err) return bot.sendNotification(`Invalid image! Please use .ascii <imgurl>`, 'error', msg);
+        if (converted.length >= 2000 - 6)
+          return msg.channel.send(`Sorry, couldn't progress your image. The ascii result is longer then 2000 characters :(`);
         msg.channel.send('```' + converted + '```').catch(console.error);
       }
     );
@@ -21,16 +23,3 @@ module.exports = {
   help: 'Transform an image into ascii art',
   args: '<string>',
 };
-
-function isURL(str) {
-  var pattern = new RegExp(
-    '^(https?:\\/\\/)?' + // protocol
-      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
-      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-      '(\\#[-a-z\\d_]*)?$',
-    'i'
-  ); // fragment locator
-  return pattern.test(str);
-}
