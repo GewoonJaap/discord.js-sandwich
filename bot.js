@@ -166,6 +166,9 @@ var loadCommands = function () {
 };
 
 var checkCommand = function (msg, isMention) {
+  msg.args = msg.content.slice(config.PREFIX.length).trim().split(/ +/g);
+  msg.args.shift();
+  console.log(msg.args);
   if (isMention) {
     let command = msg.content.split(' ')[1].toLowerCase();
     msg.content = msg.content.split(' ').splice(2, msg.content.split(' ').length).join(' ');
