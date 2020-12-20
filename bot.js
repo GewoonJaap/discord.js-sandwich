@@ -166,6 +166,7 @@ var loadCommands = function () {
 };
 
 var checkCommand = function (msg, isMention) {
+  if (msg.author.bot) return;
   msg.args = msg.content.slice(config.PREFIX.length).trim().split(/ +/g);
   msg.args.shift();
   if (isMention) {
