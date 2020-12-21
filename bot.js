@@ -166,9 +166,8 @@ var loadCommands = function () {
 };
 
 var checkCommand = function (msg, isMention) {
-  msg.args = msg.content.slice(config.PREFIX.length).trim().split(/ +/g);
-  msg.args.shift();
   if (isMention) {
+    if (!msg.content.split(' ')[1]) return;
     let command = msg.content.split(' ')[1].toLowerCase();
     msg.content = msg.content.split(' ').splice(2, msg.content.split(' ').length).join(' ');
     if (command && commands[command]) {
@@ -199,8 +198,12 @@ bot.on('ready', () => {
 
 bot.on('message', msg => {
   if (msg.author.bot || msg.guild === null) return;
+  msg.args = msg.content.slice(config.PREFIX.length).trim().split(/ +/g);
+  msg.args.shift();
+
   if (!config.DEVMODE || (config.DEVMODE && msg.guild.id == config.DEV_SERVER)) {
     if (msg.content.startsWith('<@' + bot.user.id + '>') || msg.content.startsWith('<@!' + bot.user.id + '>')) {
+      msg.args.shift();
       checkCommand(msg, true);
       if (bot.DELETE_COMMANDS) msg.delete();
     } else if (msg.content.startsWith(bot.PREFIX)) {
