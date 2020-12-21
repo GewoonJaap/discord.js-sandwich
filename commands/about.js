@@ -26,6 +26,7 @@ module.exports = {
         .addField('🥪Amount of messages I sent', `${result[0].messagesSent}`, false)
         .addField('ℹ️My source code', `https://github.com/GewoonJaap/discord.js-sandwich`, true)
         .addField('✉️Invite me', `${config.BOT_INVITE}`, true)
+        .addField('✉️Support server', `${config.BOT_SUPPORT_GUILD_INVITE}`, true)
         .addField('🖊️Coded by:', `Mr. Proper#2095`, true)
         .setThumbnail(bot.user.avatarURL())
         .setTimestamp();
