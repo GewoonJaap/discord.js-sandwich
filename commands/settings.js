@@ -8,7 +8,6 @@ module.exports = {
     }
     const setting = msg.args[0];
     const value = msg.args[1];
-    console.log(setting, value);
     if (!setting || !getSettingByValue(setting))
       return msg.channel.send(
         `You are missing the setting you want to set or the setting type you entered is incorrect. All settings that are available: ${getAllSettingNames().toString()}\nCommand usage: ${

@@ -225,11 +225,11 @@ bot.ws.on('INTERACTION_CREATE', async interaction => {
 });
 
 bot.on('guildMemberAdd', function (member) {
-  console.log(`a user joins a guild: ${member.user}`);
+  log(`a user joins a guild: ${member.user}`);
 });
 
 bot.on('guildCreate', function (guild) {
-  console.log(`the client joins a guild`);
+  log(`the client joins a guild: ${guild.id}`);
   serverConfig.addConfig(bot, guild.id);
 });
 
