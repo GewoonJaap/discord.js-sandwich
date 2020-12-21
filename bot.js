@@ -166,7 +166,6 @@ var loadCommands = function () {
 };
 
 var checkCommand = function (msg, isMention) {
-  if (msg.author.bot) return;
   msg.args = msg.content.slice(config.PREFIX.length).trim().split(/ +/g);
   msg.args.shift();
   if (isMention) {
@@ -199,6 +198,7 @@ bot.on('ready', () => {
 });
 
 bot.on('message', msg => {
+  if (msg.author.bot || msg.guild === null) return;
   if (!config.DEVMODE || (config.DEVMODE && msg.guild.id == config.DEV_SERVER)) {
     if (msg.content.startsWith('<@' + bot.user.id + '>') || msg.content.startsWith('<@!' + bot.user.id + '>')) {
       checkCommand(msg, true);
