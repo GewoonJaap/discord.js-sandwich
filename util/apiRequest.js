@@ -7,7 +7,7 @@ module.exports = {
           body = JSON.parse(body);
           resolve({ status: true, data: body });
         } else {
-          reject({ status: false });
+          resolve({ status: false });
         }
       });
     });
