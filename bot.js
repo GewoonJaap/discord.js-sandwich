@@ -8,6 +8,7 @@ const timers = require('./util/timers/index');
 const mongoose = require('mongoose');
 mongoose.connect(config.MONGODB_URL, { useNewUrlParser: true });
 const serverConfig = require('./util/serverconfig');
+const serverStats = require('./util/stats/serverStatsHandler');
 
 const bot = new Discord.Client({
   autoReconnect: true,
@@ -70,7 +71,7 @@ commands.help.main = function (bot, msg) {
 
   let embed = {
     color: bot.COLOR,
-    description: 'Here are a list of commands you can use.',
+    description: 'Here is a list of commands you can use.',
     fields: cmds,
     footer: {
       icon_url: bot.user.avatarURL,
@@ -172,6 +173,7 @@ var checkCommand = function (msg, isMention) {
     msg.content = msg.content.split(' ').splice(2, msg.content.split(' ').length).join(' ');
     if (command && commands[command]) {
       commands[command].main(bot, msg);
+      serverStats.addStats(bot, msg.guild.id, 'commandsExecuted', msg.channel.id);
       bot.cache.stats.commandsRecieved++;
       bot.cache.stats.messagesSent++;
     }
@@ -180,6 +182,7 @@ var checkCommand = function (msg, isMention) {
     msg.content = msg.content.replace(bot.PREFIX + command + ' ', '');
     if (command && commands[command]) {
       commands[command].main(bot, msg);
+      serverStats.addStats(bot, msg.guild.id, 'commandsExecuted', msg.channel.id);
       bot.cache.stats.commandsRecieved++;
       bot.cache.stats.messagesSent++;
     }
@@ -200,6 +203,7 @@ bot.on('message', msg => {
   if (msg.author.bot || msg.guild === null) return;
   msg.args = msg.content.slice(config.PREFIX.length).trim().split(/ +/g);
   msg.args.shift();
+  serverStats.addStats(bot, msg.guild.id, 'messagesRecieved', msg.channel.id);
 
   if (!config.DEVMODE || (config.DEVMODE && msg.guild.id == config.DEV_SERVER)) {
     if (msg.content.startsWith('<@' + bot.user.id + '>') || msg.content.startsWith('<@!' + bot.user.id + '>')) {
@@ -217,9 +221,10 @@ bot.ws.on('INTERACTION_CREATE', async interaction => {
   const interaction_name = interaction.data.name;
   if (!config.DEVMODE || (config.DEVMODE && interaction.guild_id == config.DEV_SERVER)) {
     if (interaction_name && interactions[interaction_name]) {
-      interactions[interaction_name].execute(bot, interaction);
+      interactions[interaction_name].execute(bot, interaction).catch(log.error(error));
       bot.cache.stats.slashCommandsRecieved++;
       bot.cache.stats.messagesSent++;
+      serverStats.addStats(bot, msg.guild.id, 'slashCommandsExecuted', msg.channel.id);
     }
   }
 });
@@ -231,6 +236,7 @@ bot.on('guildMemberAdd', function (member) {
 bot.on('guildCreate', function (guild) {
   log(`the client joins a guild: ${guild.id}`);
   serverConfig.addConfig(bot, guild.id);
+  serverStats.addServer(guild.id);
 });
 
 bot.on('error', err => {
