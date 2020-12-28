@@ -80,7 +80,11 @@ module.exports = {
     }
     embed.addField(`🔗 Links:`, `${GetLinks(launch.data.links)}`, false);
 
-    embed.setTimestamp(launch.data.date_utc);
+    embed.setTimestamp(new Date(launch.data.date_unix * 1000).toISOString());
+    embed.setFooter(
+      `${launch.data.rocket.name} | ${launch.data.name} | Data by: https://github.com/r-spacex/SpaceX-API`,
+      launch.data.links.patch.large || launch.data.links.patch.small || bot.user.avatarURL()
+    );
     msg.channel.send(msg.author, { embed });
   },
   help: 'Get info about the upcoming rocket launch from SpaceX',
