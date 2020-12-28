@@ -88,6 +88,7 @@ module.exports = {
     msg.channel.send(msg.author, { embed });
   },
   help: 'Get info about the upcoming rocket launch from SpaceX',
+  args: '[``latest`` | ``next``]',
 };
 
 function GetLinks(linksObject) {
