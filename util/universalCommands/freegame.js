@@ -9,11 +9,13 @@ module.exports = {
       let game;
       const games = data.data.data.Catalog.searchStore.elements;
       for (let i = 0; i < games.length; i++) {
-        if (games[i].promotions.promotionalOffers.length != 0) {
-          const offer = games[i].promotions.promotionalOffers[0].promotionalOffers[0];
-          if (offer.startDate.startsWith(`2020-12-${new Date().getDate()}`) || offer.endDate.startsWith(`2020-12-${new Date().getDate()}`)) {
-            game = games[i];
-            break;
+        if (games[i].promotions) {
+          if (games[i].promotions.promotionalOffers.length != 0) {
+            const offer = games[i].promotions.promotionalOffers[0].promotionalOffers[0];
+            if (offer.startDate.startsWith(`2020-12-${new Date().getDate()}`) || offer.endDate.startsWith(`2020-12-${new Date().getDate()}`)) {
+              game = games[i];
+              break;
+            }
           }
         }
       }
