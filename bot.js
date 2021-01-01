@@ -221,7 +221,7 @@ bot.ws.on('INTERACTION_CREATE', async interaction => {
   const interaction_name = interaction.data.name;
   if (!config.DEVMODE || (config.DEVMODE && interaction.guild_id == config.DEV_SERVER)) {
     if (interaction_name && interactions[interaction_name]) {
-      interactions[interaction_name].execute(bot, interaction).catch(log.error(error));
+      interactions[interaction_name].execute(bot, interaction);
       bot.cache.stats.slashCommandsRecieved++;
       bot.cache.stats.messagesSent++;
       serverStats.addStats(bot, msg.guild.id, 'slashCommandsExecuted', msg.channel.id);
