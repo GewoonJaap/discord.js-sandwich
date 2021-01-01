@@ -12,13 +12,10 @@ module.exports = {
         if (games[i].promotions) {
           if (games[i].promotions.promotionalOffers.length != 0) {
             const offer = games[i].promotions.promotionalOffers[0].promotionalOffers[0];
-            const date = new Date();
-            const month = ('0' + (date.getMonth() + 1)).slice(-2);
-            const day = ('0' + date.getDate()).slice(-2);
-            if (
-              offer.startDate.startsWith(`${date.getFullYear()}-${month}-${day}`) ||
-              offer.endDate.startsWith(`${date.getFullYear()}-${month}-${day}`)
-            ) {
+            const now = new Date();
+            const start = new Date(offer.startDate);
+            const end = new Date(offer.endDate);
+            if (now >= start && now <= end) {
               game = games[i];
               break;
             }
