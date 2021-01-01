@@ -12,7 +12,13 @@ module.exports = {
         if (games[i].promotions) {
           if (games[i].promotions.promotionalOffers.length != 0) {
             const offer = games[i].promotions.promotionalOffers[0].promotionalOffers[0];
-            if (offer.startDate.startsWith(`2020-12-${new Date().getDate()}`) || offer.endDate.startsWith(`2020-12-${new Date().getDate()}`)) {
+            const date = new Date();
+            const month = ('0' + (date.getMonth() + 1)).slice(-2);
+            const day = ('0' + date.getDate()).slice(-2);
+            if (
+              offer.startDate.startsWith(`${date.getFullYear()}-${month}-${day}`) ||
+              offer.endDate.startsWith(`${date.getFullYear()}-${month}-${day}`)
+            ) {
               game = games[i];
               break;
             }
