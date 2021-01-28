@@ -9,8 +9,7 @@ module.exports = {
         .fetchBans()
         .then(bans => {
           if (bans.size == 0) {
-            msg.reply('There are no banned users.');
-            throw 'No members to unban.';
+            bot.sendNotification(`There are no banned users`, 'success', msg);
           }
           amountOfBanned = bans.size;
           bans.forEach(ban => {
@@ -23,7 +22,7 @@ module.exports = {
           bot.sendNotification(`Error: ${e}`, 'error', msg);
         });
     } else {
-      bot.sendNotification('You need the BAN_MEMBERS permission.', 'error', msg);
+      return bot.sendNotification('You need to be an Administrator to do this!', 'error', msg);
     }
   },
   help: 'Unbans all the banned users from this guild',
