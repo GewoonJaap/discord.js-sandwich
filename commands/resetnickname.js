@@ -31,7 +31,7 @@ module.exports = {
       );
     }
     if (resetNicknames > 0) {
-      bot.sendNotification(`Resetted the nicknames for ${resetNicknames} users`, 'success', msg);
+      bot.sendNotification(`Nicknames have been reset for ${resetNicknames} users`, 'success', msg);
     }
   },
   help: 'Reset all nicknames in this guild',
