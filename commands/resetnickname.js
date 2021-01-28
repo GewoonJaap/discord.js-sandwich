@@ -25,7 +25,7 @@ module.exports = {
     console.log('done reset');
     if (failed > 1) {
       bot.sendNotification(
-        `Faild to reset the usernames of ${failed} users. Make sure to put the Sandwich role above the other roles.`,
+        `Failed to reset the usernames of ${failed} users. Make sure to put the Sandwich role above the other roles.`,
         'error',
         msg
       );
