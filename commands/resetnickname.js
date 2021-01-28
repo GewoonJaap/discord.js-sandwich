@@ -29,7 +29,7 @@ module.exports = {
         'error',
         msg
       );
-    } else if (resetNicknames > 0) {
+    } if (resetNicknames > 0) {
       bot.sendNotification(`Resetted the nicknames for ${resetNicknames} users`, 'success', msg);
     }
   },
