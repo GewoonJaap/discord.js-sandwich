@@ -1,9 +1,9 @@
 module.exports = {
   main: function (bot, msg) {
-    if (!bot.hasPermission('BAN_MEMBERS')) {
-      return bot.sendNotification('Please grant me the BAN_MEMBERS permission.', 'error', msg);
-    }
     if (msg.member.hasPermission('ADMINISTRATOR') || msg.member.id == bot.OWNERID) {
+      if (!msg.guild.me.hasPermission('BAN_MEMBERS')) {
+        return bot.sendNotification('Please grant me the BAN_MEMBERS permission.', 'error', msg);
+      }
       let amountOfBanned = 0;
       msg.guild
         .fetchBans()
