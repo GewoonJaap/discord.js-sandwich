@@ -15,7 +15,7 @@ module.exports = {
             const now = new Date();
             const start = new Date(offer.startDate);
             const end = new Date(offer.endDate);
-            if (now >= start && now <= end) {
+            if (now >= start && now <= end && games[i].price.totalPrice.fmtPrice.discountPrice == "0") {
               game = games[i];
               break;
             }
