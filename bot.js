@@ -224,7 +224,7 @@ bot.ws.on('INTERACTION_CREATE', async interaction => {
       interactions[interaction_name].execute(bot, interaction);
       bot.cache.stats.slashCommandsRecieved++;
       bot.cache.stats.messagesSent++;
-      serverStats.addStats(bot, msg.guild.id, 'slashCommandsExecuted', msg.channel.id);
+      serverStats.addStats(bot, interaction.guild_id, 'slashCommandsExecuted', interaction.channel_id);
     }
   }
 });
