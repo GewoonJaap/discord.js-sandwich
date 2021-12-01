@@ -12,7 +12,7 @@ module.exports = {
     const result = await freegame.execute();
     console.log(result);
     slashCommand.execute(bot, interaction, {
-      embeds: [result],
+      embeds: result,
     });
   },
 };

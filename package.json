@@ -4,6 +4,7 @@
   "description": "A modular bot template for [discord.js](https://github.com/hydrabolt/discord.js/).",
   "main": "bot.js",
   "scripts": {
+    "start": "node bot.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write \"**/*.{js,json,less,css,md}\"",
     "format:check": "prettier --loglevel debug --check \"**/*.{js,json,less,css,md}\"",

@@ -8,7 +8,7 @@ module.exports = {
       'https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=en-US&country=NL&allowCountries=NL'
     );
     if (data.status) {
-      let game;
+      let freeGames = [];
       const games = data.data.data.Catalog.searchStore.elements;
 
       for (let i = 0; i < games.length; i++) {
@@ -18,28 +18,59 @@ module.exports = {
             const now = new Date();
             const start = new Date(offer.startDate);
             const end = new Date(offer.endDate);
-            if (now >= start && now <= end && games[i].price.totalPrice.fmtPrice.discountPrice == "0") {
-              game = games[i];
-              break;
+            if (now >= start && now <= end && games[i].price.totalPrice.fmtPrice.discountPrice == '0') {
+              freeGames.push(games[i]);
             }
           }
         }
       }
-      console.log(game.title);
-      if (!bot.cache.epicGamesGame) bot.cache.epicGamesGame = game;
+      console.log(freeGames);
 
-      const cached = bot.cache.epicGamesGame;
+      let gamesToAnnounce = [];
+      let coldStart = false;
+      if (!bot.cache.epicGamesGame) {
+        bot.cache.epicGamesGame = [];
+        coldStart = true;
+      }
+      freeGames.forEach(game => {
+        let found = false;
+        bot.cache.epicGamesGame.forEach(cachedGame => {
+          if (cachedGame.title == game.title) {
+            found = true;
+          }
+        });
+        if (!found) {
+          bot.cache.epicGamesGame.push(game);
+          gamesToAnnounce.push(game);
+          console.log(`New game! ${game.title}`);
+        }
+      });
+
+      if (coldStart) return;
+
       try {
-        if (cached.title != game.title) {
-          console.log(`New game! ${cached.title} -> ${game.title}`);
-          const embed = await gameEmbed.execute();
+        if (gamesToAnnounce.length > 0) {
+          const embeds = await gameEmbed.execute();
+
+          let embedsToSend = [];
+          embeds.forEach(embed => {
+            let shouldAnnounce = gamesToAnnounce.some(function (game) {
+              return embed.title.includes(game.title);
+            });
+            if (shouldAnnounce) {
+              embedsToSend.push(embed);
+            }
+          });
+
           serverConfigs.find({}, function (err, result) {
             if (err) log.error(err);
             else {
-              bot.cache.epicGamesGame = game;
               for (let i = 0; i < result.length; i++) {
                 try {
-                  bot.channels.cache.get(result[i].epicGamesGameChannel).send('There is a new Epic Games free game!', { embed });
+                  log.info(`Sending free game announcement to guild: ${result[i].guildID} with channel: ${result[i].epicGamesGameChannel}`);
+                  embedsToSend.forEach(embed => {
+                    bot.channels.cache.get(result[i].epicGamesGameChannel).send('There is a new Epic Games free game!', { embed });
+                  });
                 } catch (error) {}
               }
             }
