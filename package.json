@@ -40,7 +40,7 @@
     "morse-node": "^0.1.1",
     "mustache": "^4.1.0",
     "node-superfetch": "^0.1.10",
-    "prettier": "^2.2.1",
+    "prettier": "^2.4.1",
     "request": "^2.88.2",
     "systeminformation": "^4.34.23",
     "uuid": "^8.3.2"
