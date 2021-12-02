@@ -39,7 +39,7 @@
     "mongoose": "^5.11.8",
     "morse-node": "^0.1.1",
     "mustache": "^4.1.0",
-    "node-superfetch": "^0.1.10",
+    "node-superfetch": "^0.2.3",
     "prettier": "^2.2.1",
     "request": "^2.88.2",
     "systeminformation": "^4.34.23",
