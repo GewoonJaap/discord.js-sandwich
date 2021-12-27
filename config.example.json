@@ -20,5 +20,6 @@
   "ERROR_COLOR": "0x0000ff",
   "INFO_COLOR": "0x0000ff",
 
-  "DIALOGFLOW_PROJECTID": "Dialogflow Project ID, used for bigbrain.js"
+  "DIALOGFLOW_PROJECTID": "Dialogflow Project ID, used for bigbrain.js",
+  "MONGODB_URL": "MONGO CONNECT URL"
 }
