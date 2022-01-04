@@ -12,12 +12,12 @@ module.exports = {
       return msg.channel.send(
         `You are missing the setting you want to set or the setting type you entered is incorrect. All settings that are available: ${getAllSettingNames().toString()}\nCommand usage: ${
           config.PREFIX
-        }settings <\`\`setting type\`\`>`
+        }settings \`\`<setting type>\`\``
       );
     const foundSetting = getSettingByValue(setting);
     if (!value && foundSetting.args.length != 0)
       return msg.channel.send(
-        `You are missing arguments. Command usage: ${config.PREFIX}settings ${foundSetting.value} <\`\`${foundSetting.args.toString()}\`\`>`
+        `You are missing arguments. Command usage: ${config.PREFIX}settings ${foundSetting.value} \`\`<${foundSetting.args.toString()}>\`\``
       );
     require(`../util/settings/${setting}.js`).execute(bot, msg);
   },
