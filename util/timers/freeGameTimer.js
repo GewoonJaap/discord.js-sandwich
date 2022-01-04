@@ -66,12 +66,14 @@ module.exports = {
             if (err) log.error(err);
             else {
               for (let i = 0; i < result.length; i++) {
-                try {
-                  log.info(`Sending free game announcement to guild: ${result[i].guildID} with channel: ${result[i].epicGamesGameChannel}`);
-                  embedsToSend.forEach(embed => {
-                    bot.channels.cache.get(result[i].epicGamesGameChannel).send('There is a new Epic Games free game!', { embed });
-                  });
-                } catch (error) {}
+                if (result[i].epicGamesGameChannel != undefined) {
+                  try {
+                    log.info(`Sending free game announcement to guild: ${result[i].guildID} with channel: ${result[i].epicGamesGameChannel}`);
+                    embedsToSend.forEach(embed => {
+                      bot.channels.cache.get(result[i].epicGamesGameChannel).send('There is a new Epic Games free game!', { embed });
+                    });
+                  } catch (error) {}
+                }
               }
             }
           });

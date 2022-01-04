@@ -3,5 +3,10 @@
     "name": "Epic Games free game announcement channel",
     "value": "epicGamesGameChannel",
     "args": ["channelID"]
+  },
+  {
+    "name": "Amazon Prime free game announcement channel",
+    "value": "amazonPrimeGameChannel",
+    "args": ["channelID"]
   }
 ]
