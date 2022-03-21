@@ -30,7 +30,7 @@
     "@babel/preset-env": "^7.12.11",
     "babel-eslint": "^10.1.0",
     "canvas": "^2.6.1",
-    "dialogflow": "^1.2.0",
+    "dialogflow": "^4.0.3",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "eslint": "^7.32.0",
