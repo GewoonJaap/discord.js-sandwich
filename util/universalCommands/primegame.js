@@ -1,7 +1,9 @@
 const { MessageEmbed } = require('discord.js');
 const request = require('../apiRequest');
+const amazonPrime = require('../amazonPrime/amazonPrime');
 module.exports = {
   execute: async function () {
+    const securityHeaders = await amazonPrime.getSecurityHeaders();
     const data = await request.post(
       'https://gaming.amazon.com/graphql?nonce=39d47184-7e2a-4ddc-91cf-a58e113f18cb',
       {

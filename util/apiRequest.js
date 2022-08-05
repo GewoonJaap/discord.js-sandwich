@@ -4,8 +4,11 @@ module.exports = {
     return new Promise(function (resolve, reject) {
       request(url, function (error, res, body) {
         if (!error && res.statusCode == 200) {
+          try{
           body = JSON.parse(body);
-          resolve({ status: true, data: body });
+          } catch(e){
+          }
+          resolve({ status: true, data: body, headers: res.headers });
         } else {
           resolve({ status: false });
         }
@@ -24,7 +27,7 @@ module.exports = {
     return new Promise(function (resolve, reject) {
       request.post(options, async function (error, res, body) {
         if (!error && res.statusCode == 200) {
-          resolve({ status: true, data: body });
+          resolve({ status: true, data: body, headers: res.headers });
         } else {
           resolve({ status: false });
         }
