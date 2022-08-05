@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const request = require('../apiRequest');
+const gameHelper = require('../epicGames/freeGameHelper');
 module.exports = {
   execute: async function () {
     const data = await request.execute(
@@ -29,7 +30,7 @@ module.exports = {
           .setDescription(game.description)
           .setThumbnail(game.keyImages[0].url)
           .setImage(game.keyImages[1].url)
-          .setURL(`https://www.epicgames.com/store/en-US/product/${game.productSlug}`)
+          .setURL(gameHelper.getGameURL(game))
           .setTimestamp();
         freeGamesEmbeds.push(embed);
       });
