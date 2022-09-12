@@ -3439,10 +3439,10 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-systeminformation@^4.34.23:
-  version "4.34.23"
-  resolved "https://registry.npmjs.org/systeminformation/-/systeminformation-4.34.23.tgz"
-  integrity sha512-33+lQwlLxXoxy0o9WLOgw8OjbXeS3Jv+pSl+nxKc2AOClBI28HsdRPpH0u9Xa9OVjHLT9vonnOMw1ug7YXI0dA==
+systeminformation@^5.6.4:
+  version "5.6.4"
+  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.6.4.tgz#5f32fcb05a5849e2a0e71b182c1f56ce32219310"
+  integrity sha512-b2tvW1R+qjNEoAGgh734EGLgqbDMghjsHRaWo36skAC6JM1tw1pitcGz/REt+qSIRSXbE4PKECojhaSrBRrEmw==
 
 table@^6.0.9:
   version "6.7.5"
