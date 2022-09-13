@@ -28,5 +28,23 @@
     "FancyName": "It's not funny, I got school",
     "soundFile": "notfunny_school.mp3",
     "messageToSend": "https://c.tenor.com/OZvLAWJtp2sAAAAd/its-not-funneh.gif"
+  },
+  {
+    "interactionName": "nokia_arab",
+    "FancyName": "Nokia arab ringtone",
+    "soundFile": "nokia_arab.mp3",
+    "messageToSend": "https://c.tenor.com/7EExTWdWTNcAAAAd/nokia3310.gif"
+  },
+  {
+    "interactionName": "skype_ringtone",
+    "FancyName": "Skype ringtone",
+    "soundFile": "skype_ringtone.mp3",
+    "messageToSend": "https://c.tenor.com/kJomryAjrC4AAAAM/skype-rock.gif"
+  },
+  {
+    "interactionName": "computer_wirus_sound",
+    "FancyName": "Hello your computer has wirus",
+    "soundFile": "computer_wirus.mp3",
+    "messageToSend": "https://c.tenor.com/aUGKNa38o-gAAAAM/virus-computer.gif"
   }
 ]

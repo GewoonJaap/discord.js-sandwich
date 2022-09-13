@@ -35,6 +35,5 @@ function createChoicesArray() {
       value: sound.interactionName,
     });
   }
-  console.log(choices);
   return choices;
 }
