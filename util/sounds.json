@@ -1,0 +1,32 @@
+[
+  {
+    "interactionName": "corn",
+    "FancyName": "It's corn!",
+    "soundFile": "corn.mp3",
+    "messageToSend": "https://media2.giphy.com/media/M3VwvhJZQBrNo4BWNn/giphy.gif?cid=ecf05e47q8lu0r9dfukkyhd1fhbv8mqrqrkupdq3mhmy7e7d&rid=giphy.gif&ct=g"
+  },
+  {
+    "interactionName": "TopG",
+    "FancyName": "Top-G",
+    "soundFile": "topg.mp3",
+    "messageToSend": "https://c.tenor.com/uJy67OT5Qc4AAAAM/andrew-tate-tate.gif"
+  },
+  {
+    "interactionName": "funnyhaha_funnyweird",
+    "FancyName": "Mmm Funny, not funny haha, funny weird",
+    "soundFile": "funnyhaha_funnyweird.mp3",
+    "messageToSend": "https://c.tenor.com/SM55NxnE6_kAAAAd/lick-boy-lick.gif"
+  },
+  {
+    "interactionName": "outro",
+    "FancyName": "Outro song",
+    "soundFile": "outro.mp3",
+    "messageToSend": "https://giphy.com/embed/ZBVhKIDgts1eHYdT7u"
+  },
+  {
+    "interactionName": "notfunny_school",
+    "FancyName": "It's nopt funny, I got school",
+    "soundFile": "notfunny_school.mp3",
+    "messageToSend": "https://c.tenor.com/OZvLAWJtp2sAAAAd/its-not-funneh.gif"
+  }
+]
