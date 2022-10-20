@@ -1,9 +1,9 @@
 const slashCommand = require('../util/slashcommand/index');
-const freegame = require('../util/universalCommands/primegame');
+const freegame = require('../util/universalCommands/unrealFreeMonth');
 module.exports = {
   registerCommand: function (bot) {
     slashCommand.registerCommand(bot, {
-      name: 'primegame',
+      name: 'unrealfreemonth',
       description: freegame.description,
     });
   },

@@ -6,6 +6,7 @@ const serverConfigSchema = new Schema(
     serverID: String,
     epicGamesGameChannel: String,
     amazonPrimeGameChannel: String,
+    unrealEngineFreeMonthGameChannel: String,
   },
   {
     timestamps: {

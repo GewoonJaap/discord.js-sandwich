@@ -155,6 +155,29 @@ function loadInteractions() {
   log.info('———— All Interactions Loaded! ————');
 }
 
+// remove all unused interactions
+async function removeUnusedInteractions() {
+  let commands = await bot.api.applications(bot.user.id).commands.get();
+  log.info('———— Removing Unused Interactions ————');
+  for (let command of commands) {
+    if (!interactions[command.name]) {
+      await bot.api.applications(bot.user.id).commands(command.id).delete();
+      bot.api
+        .applications(bot.user.id)
+        .commands.fetch(command.id)
+        .then(cmd => {
+          cmd.delete();
+        })
+        .catch(err => {
+          log.error(err);
+        });
+
+      log('Removed unused interaction ' + command.name);
+    }
+  }
+  log.info('———— Unused Interactions Removed! ————');
+}
+
 var loadCommands = function () {
   let files = fs.readdirSync(__dirname + '/commands');
   for (let file of files) {
@@ -197,6 +220,7 @@ bot.on('ready', () => {
   setInterval(function () {
     require('./util/botStatus').setDefaultStatus(bot);
   }, 1000 * 120);
+  removeUnusedInteractions();
 });
 
 bot.on('message', msg => {

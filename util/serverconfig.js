@@ -1,6 +1,6 @@
 const log = require('fancy-log');
 const serverConfig = require('../model/serverconfig');
-const allowedUpdateKeys = ['epicGamesGameChannel', 'amazonPrimeGameChannel'];
+const allowedUpdateKeys = ['epicGamesGameChannel', 'unrealEngineFreeMonthGameChannel'];
 module.exports = {
   addConfig: function (bot, guildId) {
     serverConfig.findOne({ serverID: guildId }, function (err, result) {
@@ -9,6 +9,7 @@ module.exports = {
           serverID: guildId,
           epicGamesGameChannel: undefined,
           amazonPrimeGameChannel: undefined,
+          unrealEngineFreeMonthGameChannel: undefined,
         });
         newConfig.save(function (err, result) {
           if (err) return log.error(err);

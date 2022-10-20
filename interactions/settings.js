@@ -18,8 +18,8 @@ module.exports = {
               value: 'epicGamesGameChannel',
             },
             {
-              name: 'Amazon Prime free game announcement channel',
-              value: 'amazonPrimeGameChannel',
+              name: 'Unreal Engine Free for the momnth announcement channel',
+              value: 'unrealEngineFreeMonthGameChannel',
             },
           ],
         },

@@ -70,7 +70,9 @@ module.exports = {
                   try {
                     log.info(`Sending free game announcement to guild: ${result[i].guildID} with channel: ${result[i].epicGamesGameChannel}`);
                     embedsToSend.forEach(embed => {
-                      bot.channels.cache.get(result[i].epicGamesGameChannel).send('There is a new Epic Games free game!', { embed });
+                      bot.channels.cache
+                        .get(result[i].epicGamesGameChannel)
+                        .send('There is a new free game of the week in the Epic Games Store!', { embed });
                     });
                   } catch (error) {}
                 }
