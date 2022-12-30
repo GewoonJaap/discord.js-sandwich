@@ -46,5 +46,11 @@
     "FancyName": "Hello your computer has wirus",
     "soundFile": "computer_wirus.mp3",
     "messageToSend": "https://c.tenor.com/aUGKNa38o-gAAAAM/virus-computer.gif"
+  },
+  {
+    "interactionName": "het_is_echt_waar",
+    "FancyName": "Oma, het is echt waar",
+    "soundFile": "HetIsEchtWaar.mp3",
+    "messageToSend": "https://media.tenor.com/0ARWSQ5WWggAAAAd/grigoleit-oma.gif"
   }
 ]
