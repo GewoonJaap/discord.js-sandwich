@@ -9,6 +9,8 @@ const mongoose = require('mongoose');
 mongoose.connect(config.MONGODB_URL, { useNewUrlParser: true });
 const serverConfig = require('./util/serverconfig');
 const serverStats = require('./util/stats/serverStatsHandler');
+const blacklistCheck = require('./util/blacklistCheck');
+const slashCommand = require('./util/slashcommand/index');
 
 const bot = new Discord.Client({
   autoReconnect: true,
@@ -243,6 +245,15 @@ bot.on('message', msg => {
 
 bot.ws.on('INTERACTION_CREATE', async interaction => {
   const interaction_name = interaction.data.name;
+  //blacklist check
+  const blacklist = await blacklistCheck.checkBlacklist(bot, interaction.guild_id);
+  if (blacklist) {
+    slashCommand.execute(bot, interaction, {
+      embeds: blacklistCheck.getBlacklistEmbed(blacklist),
+    });
+    return;
+  }
+
   if (!config.DEVMODE || (config.DEVMODE && interaction.guild_id == config.DEV_SERVER)) {
     if (interaction_name && interactions[interaction_name]) {
       interactions[interaction_name].execute(bot, interaction);
