@@ -191,12 +191,19 @@ var loadCommands = function () {
   log.info('———— All Commands Loaded! ————');
 };
 
-var checkCommand = function (msg, isMention) {
+var checkCommand = async function (msg, isMention) {
   if (isMention) {
     if (!msg.content.split(' ')[1]) return;
     let command = msg.content.split(' ')[1].toLowerCase();
     msg.content = msg.content.split(' ').splice(2, msg.content.split(' ').length).join(' ');
     if (command && commands[command]) {
+      const blacklist = await blacklistCheck.checkBlacklist(bot, msg.guild.id, msg.author.id);
+      if (blacklist) {
+        const blacklistEmbed = blacklistCheck.getBlacklistEmbed(blacklist);
+        msg.channel.send(blacklistEmbed);
+        return;
+      }
+
       commands[command].main(bot, msg);
       serverStats.addStats(bot, msg.guild.id, 'commandsExecuted', msg.channel.id);
       bot.cache.stats.commandsRecieved++;
@@ -206,6 +213,12 @@ var checkCommand = function (msg, isMention) {
     let command = msg.content.split(bot.PREFIX)[1].split(' ')[0].toLowerCase();
     msg.content = msg.content.replace(bot.PREFIX + command + ' ', '');
     if (command && commands[command]) {
+      const blacklist = await blacklistCheck.checkBlacklist(bot, msg.guild.id, msg.author.id);
+      if (blacklist) {
+        const blacklistEmbed = blacklistCheck.getBlacklistEmbed(blacklist);
+        msg.channel.send(blacklistEmbed);
+        return;
+      }
       commands[command].main(bot, msg);
       serverStats.addStats(bot, msg.guild.id, 'commandsExecuted', msg.channel.id);
       bot.cache.stats.commandsRecieved++;
@@ -246,10 +259,10 @@ bot.on('message', msg => {
 bot.ws.on('INTERACTION_CREATE', async interaction => {
   const interaction_name = interaction.data.name;
   //blacklist check
-  const blacklist = await blacklistCheck.checkBlacklist(bot, interaction.guild_id);
+  const blacklist = await blacklistCheck.checkBlacklist(bot, interaction.guild_id, interaction.member.user.id);
   if (blacklist) {
     slashCommand.execute(bot, interaction, {
-      embeds: blacklistCheck.getBlacklistEmbed(blacklist),
+      embeds: [blacklistCheck.getBlacklistEmbed(blacklist)],
     });
     return;
   }

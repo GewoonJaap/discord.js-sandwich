@@ -18,7 +18,7 @@ module.exports = {
 
   execute: function (bot, interaction) {
     const user = interaction.member.user;
-    const title = `${user.username}#${user.discriminator} | ${user.id}`;
+    const title = `${user.username}#${user.discriminator} | User ID: ${user.id} | Server ID: ${interaction.guild_id}`;
     feedbackSave.saveFeedback(bot, title, interaction.data.options[0].value);
     slashCommand.execute(bot, interaction, {
       content: 'Thanks for your feedback. Here have a sandwich🥪',
