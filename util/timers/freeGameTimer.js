@@ -12,14 +12,25 @@ module.exports = {
       const games = data.data.data.Catalog.searchStore.elements;
 
       for (let i = 0; i < games.length; i++) {
+        log.info(`Found game: ${games[i].title}, ${i}/${games.length}`);
         if (games[i].promotions) {
           if (games[i].promotions.promotionalOffers.length != 0) {
-            const offer = games[i].promotions.promotionalOffers[0].promotionalOffers[0];
-            const now = new Date();
-            const start = new Date(offer.startDate);
-            const end = new Date(offer.endDate);
-            if (now >= start && now <= end && games[i].price.totalPrice.fmtPrice.discountPrice == '0') {
-              freeGames.push(games[i]);
+            for (let j = 0; j < games[i].promotions.promotionalOffers[0].promotionalOffers.length; j++) {
+              const offer = games[i].promotions.promotionalOffers[0].promotionalOffers[j];
+              if (
+                games[i].price.totalPrice.fmtPrice.discountPrice == '0' &&
+                offer.discountSetting.discountPercentage == 0 &&
+                offer.startDate &&
+                offer.endDate
+              ) {
+                const now = new Date();
+                const start = new Date(offer.startDate);
+                const end = new Date(offer.endDate);
+                if (now >= start && now <= end && games[i].price.totalPrice.fmtPrice.discountPrice == '0') {
+                  freeGames.push(games[i]);
+                  break;
+                }
+              }
             }
           }
         }
@@ -61,6 +72,13 @@ module.exports = {
               embedsToSend.push(embed);
             }
           });
+
+          log.info(`Found ${embedsToSend.length} games to announce`);
+
+          if (bot.DEVMODE) {
+            log.info('DEVMODE is enabled, not sending any announcements');
+            return;
+          }
 
           serverConfigs.find({}, function (err, result) {
             if (err) log.error(err);

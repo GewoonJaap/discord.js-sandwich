@@ -19,6 +19,7 @@ const bot = new Discord.Client({
 bot.OWNERID = config.OWNERID;
 bot.PREFIX = config.PREFIX;
 bot.TOKEN = config.TOKEN;
+bot.DEVMODE = config.DEVMODE;
 
 bot.DETAILED_LOGGING = config.DETAILED_LOGGING;
 bot.DELETE_COMMANDS = config.DELETE_COMMANDS;
