@@ -28,14 +28,14 @@ module.exports = {
 
       let gamesToAnnounce = [];
       let coldStart = false;
-      if (!bot.cache.epicGamesGame) {
+      if (!bot.cache.epicGamesGame || bot.cache.epicGamesGame.length == 0) {
         bot.cache.epicGamesGame = [];
         coldStart = true;
       }
       freeGames.forEach(game => {
         let found = false;
         bot.cache.epicGamesGame.forEach(cachedGame => {
-          if (cachedGame.title == game.title) {
+          if (cachedGame.title.toLowerCase().localeCompare(game.title.toLowerCase()) == 0) {
             found = true;
           }
         });

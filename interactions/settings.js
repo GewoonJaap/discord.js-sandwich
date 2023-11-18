@@ -25,9 +25,9 @@ module.exports = {
         },
         {
           name: 'channel',
-          description: 'Channel to set',
+          description: 'Channel to set, leave empty to clear',
           type: 7,
-          required: true,
+          required: false,
         },
       ],
     });
@@ -41,7 +41,7 @@ module.exports = {
       });
     }
     const settingType = interaction.data.options[0].value;
-    const channel = interaction.data.options[1].value;
+    const channel = interaction.data.options[1]?.value ?? undefined;
     const result = await serverConfig.updateConfig(bot, interaction.guild_id, channel, settingType);
     slashCommand.execute(bot, interaction, {
       content: result,
