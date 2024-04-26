@@ -1,0 +1,8 @@
+version: '3'
+services:
+  discordjs-sandwich-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
