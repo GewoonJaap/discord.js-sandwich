@@ -6,3 +6,4 @@ services:
       dockerfile: Dockerfile
     volumes:
       - .:/app
+    restart: always
