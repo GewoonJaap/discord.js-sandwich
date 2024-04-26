@@ -5,5 +5,12 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - .:/app
+      - ./commands:/app/commands
+      - ./interactions:/app/interactions
+      - ./model:/app/model
+      - ./sounds:/app/sounds
+      - ./util:/app/util
+      - ./config.json:/app/config.json
+      - ./googlecloud.json:/app/googlecloud.json
+      - ./.env:/app/.env
     restart: always
