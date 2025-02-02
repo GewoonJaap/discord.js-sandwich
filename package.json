@@ -28,7 +28,7 @@
     "@babel/plugin-proposal-export-default-from": "^7.12.1",
     "@babel/plugin-proposal-export-namespace-from": "^7.12.1",
     "@babel/preset-env": "^7.12.11",
-    "@discordjs/opus": "^0.8.0",
+    "@discordjs/opus": "^0.10.0",
     "babel-eslint": "^10.1.0",
     "dialogflow": "^1.2.0",
     "discord.js": "^12.5.1",
